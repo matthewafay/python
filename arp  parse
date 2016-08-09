@@ -1,0 +1,48 @@
+#arp
+
+import subprocess
+from subprocess import Popen, PIPE
+
+
+#how to get a arp in cmd's output this works                        
+p = Popen(['arp', '-a'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+output = p.communicate()[0]
+#print(output)
+
+tempCount = 0
+
+#writing to a file
+arp_file = open('arp.txt', 'w')
+for i in str(output):
+    if i ==' ':
+        arp_file.write('\n')
+    else:
+        arp_file.write(i)
+arp_file.close()
+
+b = open('arp.txt', 'r')
+for line in b:
+    if '192.168.1' in line:
+        print(line)
+        tempCount += 1
+b.close()
+
+print("Stations: {}".format(tempCount))
+
+maxStation = 10
+#station status
+#for num in range(maxStation):
+#    stationNum = num + 1
+#    stationStatus = "Good"
+#    arp_file.write("\nRevent{} status: {}".format(stationNum, stationStatus))
+#arp_file.close()
+
+
+#arp to txt v2
+#f = open('arp.text','r+')
+#tempar = [f.read().split()]
+#for i in tempar:
+#    f.write(str(i + '\n'))
+#print(tempar[0])
+
+#f.close()
