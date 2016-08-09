@@ -1,0 +1,19 @@
+#ping station finder 
+
+import subprocess
+from subprocess import Popen, PIPE
+
+#Find all stations on the network up to 10                      
+stationList=[]
+station = 1
+stationMax = 10
+for i in range(stationMax):
+    p = Popen(['ping', 'revent{}'.format(str(station))], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    output = p.communicate()[0]
+    if "Reply" in str(output):
+        stationList.append("Revent{}".format(station))        
+    else:
+        print("Station{} is not on the network".format(str(station)))
+    station+=1
+print("\nThese are the stations on the network:")
+print(stationList)
