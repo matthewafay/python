@@ -1,0 +1,6 @@
+#progress bar test
+
+max = 10
+
+for i in range(max):
+    print("%" + str(int(100*(i + 1) /max)))
